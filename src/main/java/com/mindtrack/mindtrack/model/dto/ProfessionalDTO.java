@@ -1,6 +1,4 @@
-package com.mindtrack.model;
-
-import java.time.LocalDate;
+package com.mindtrack.mindtrack.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
