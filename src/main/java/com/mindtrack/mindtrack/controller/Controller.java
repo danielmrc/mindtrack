@@ -7,5 +7,7 @@ import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
 public interface Controller {
 
     ResponseEntity<Object> createProfessional(ProfessionalDTO request);
+
+    ResponseEntity<Object> updateProfessional(long id, ProfessionalDTO request);
     
 }
