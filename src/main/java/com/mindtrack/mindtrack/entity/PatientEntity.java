@@ -3,7 +3,10 @@ package com.mindtrack.mindtrack.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ManyToAny;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static com.mindtrack.mindtrack.constant.AppConstant.SCHEMA;
 
@@ -39,5 +43,8 @@ public class PatientEntity {
 
     @Column(name = "responsible")
     private String responsible;
+
+    @ManyToMany(mappedBy = "patients")
+    List<ProfessionalEntity> professionals;
     
 }

@@ -6,8 +6,11 @@ import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
 
 public interface Controller {
 
-    ResponseEntity<Object> createProfessional(ProfessionalDTO request);
+    ResponseEntity<?> createProfessional(ProfessionalDTO request);
 
-    ResponseEntity<Object> updateProfessional(long id, ProfessionalDTO request);
+    ResponseEntity<?> updateProfessional(String id, ProfessionalDTO request);
+
+    ResponseEntity<?> deleteProfessional(String id);
     
+    ResponseEntity<?> selectProfessional(String id);
 }

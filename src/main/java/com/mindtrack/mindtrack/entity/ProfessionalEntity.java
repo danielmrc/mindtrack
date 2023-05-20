@@ -3,6 +3,9 @@ package com.mindtrack.mindtrack.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +15,7 @@ import lombok.Setter;
 
 import static com.mindtrack.mindtrack.constant.AppConstant.SCHEMA;
 
+import java.util.List;
 import java.time.LocalDate;
 
 
@@ -39,5 +43,11 @@ public class ProfessionalEntity {
 
     @Column(name = "email_address")
     private String emailAddress;
+
+    @ManyToMany()
+    @JoinTable( name = "professional_patient",
+                joinColumns = @JoinColumn(name = "crp"),
+                inverseJoinColumns = @JoinColumn(name = "cpf"))
+    private List<PatientEntity> patients;
 
 }
