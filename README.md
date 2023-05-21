@@ -182,7 +182,7 @@
 
     ```java
         {
-            "description": "Sucess patient creating",
+            "description": "Sucess patient selecting",
             "object": {
                 "name": "testando para segundo profissional",
                 "phoneNumber": "3198477995",
@@ -200,3 +200,79 @@
     ```
 
     retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o cpf passado
+
+
+#Criar consulta
+
+ Post: url> /appointment/{crp}/{cpf}
+    
+    exemplo de resposta
+
+        ```java
+        {
+            "description": "Sucess appointment creating",
+            "object": {
+                "date": "15/10/2023 11:29",
+                "recurrence": "Trimestral",
+                "local": "Consultório",
+                "inPerson": true,
+                "price": 99.99,
+                "paid": false
+            }
+        }   
+    ```
+
+    OBS: passar o "date" no formato dd/MM/yyyy hh:mm
+
+    retorna 200 em caso de sucesso e 422 em caso de exceção
+
+
+#Listar consultas
+
+ Get: url> /appointment/{crp}
+
+    irá listar as consultas daquele professional
+    
+    exemplo de resposta
+
+        ```java
+        {
+            "description": "Sucess appointments selecting",
+            "object": [
+                {
+                    "date": "15/10/2023 11:29",
+                    "recurrence": "Trimestral",
+                    "local": "Consultório",
+                    "inPerson": true,
+                    "price": 99.99,
+                    "paid": false
+                },
+                {
+                    "date": "15/02/2023 15:30",
+                    "recurrence": "Trimestral",
+                    "local": "Consultório",
+                    "inPerson": true,
+                    "price": 120.0,
+                    "paid": false
+                }
+            ]
+        }
+    ```
+
+    retorna 200 em caso de sucesso, 204 caso não encontre registro e 422 em caso de exceção
+
+
+#Auth (Login)
+
+  Post: url> /professional/authentication
+
+  exemplo de body a ser enviado:
+
+    ```java
+        {
+            "email": "testandoauthenticacao@gmail.com",
+            "password": "123"
+        }
+    ```
+
+    retorna 200 em caso de login bem sucedido, 204 caso não encontre o professional com aquele email e 422 em casos de senha ou email errado

@@ -2,6 +2,7 @@ package com.mindtrack.mindtrack.controller;
 
 import org.springframework.http.ResponseEntity;
 
+import com.mindtrack.mindtrack.model.dto.AuthenticationDTO;
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
 
 public interface ProfessionalController {
@@ -15,5 +16,7 @@ public interface ProfessionalController {
     ResponseEntity<?> selectProfessional(String id);
 
     ResponseEntity<?> selectPatients(String id);
-    
+
+    ResponseEntity<?> authentication(AuthenticationDTO request);
+
 }

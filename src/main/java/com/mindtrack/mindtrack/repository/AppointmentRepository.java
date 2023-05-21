@@ -3,9 +3,9 @@ package com.mindtrack.mindtrack.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mindtrack.mindtrack.entity.ProfessionalPatientEntity;
+import com.mindtrack.mindtrack.entity.AppointmentEntity;
 
 @Repository
-public interface ProfessionalPatientRepository extends JpaRepository<ProfessionalPatientEntity, Long>{
+public interface AppointmentRepository extends JpaRepository<AppointmentEntity, Integer>{
     
 }

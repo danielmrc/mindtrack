@@ -9,6 +9,7 @@ import com.mindtrack.mindtrack.model.dto.SucessModel;
 import com.mindtrack.mindtrack.repository.ProfessionalRepository;
 import com.mindtrack.mindtrack.entity.AddressEntity;
 import com.mindtrack.mindtrack.entity.ProfessionalEntity;
+import com.mindtrack.mindtrack.exception.AuthenticateException;
 import com.mindtrack.mindtrack.exception.CreateException;
 import com.mindtrack.mindtrack.exception.DataNotFoundException;
 import com.mindtrack.mindtrack.exception.UpdateException;
@@ -39,30 +40,37 @@ public class ProfessionalModelImpl implements ProfessionalModel{
 
     @Override
     public SucessModel insertProfessional(ProfessionalDTO request) {
-        var address = AddressEntity.builder()
-            .city(request.getCity())
-            .country(request.getCountry())
-            .postalCode(request.getPostalCode())
-            .state(request.getState())
-            .street(request.getStreet()).build();
+        var verifyProfessional = professionalRepository.findByEmailAddress(request.getEmailAddress());
 
-        var professional = ProfessionalEntity.builder()
-            .crp(request.getCrp())
-            .dateOfBirth(LocalDate.parse(request.getDateOfBirth(), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-            .emailAddress(request.getEmailAddress())
-            .name(request.getName())
-            .phoneNumber(request.getPhoneNumber())
-            .address(address).build();
+        if(verifyProfessional.isEmpty()){
+            var address = AddressEntity.builder()
+                .city(request.getCity())
+                .country(request.getCountry())
+                .postalCode(request.getPostalCode())
+                .state(request.getState())
+                .street(request.getStreet()).build();
 
-        try {
-            professionalRepository.save(professional);
+            var professional = ProfessionalEntity.builder()
+                .crp(request.getCrp())
+                .dateOfBirth(LocalDate.parse(request.getDateOfBirth(), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .emailAddress(request.getEmailAddress())
+                .name(request.getName())
+                .phoneNumber(request.getPhoneNumber())
+                .password(request.getPassword())
+                .address(address).build();
 
-            return SucessModel.builder()
-                .description(String.format(SUCESS_CREATING_MESSAGING,"Professional"))
-                .object(request).build();
-        } catch (Exception e) {
-            throw new CreateException(String.format(ERROR_CREATING_MESSAGING, "Professional", e.getMessage()));
+            try {
+                professionalRepository.save(professional);
+
+                return SucessModel.builder()
+                    .description(String.format(SUCESS_CREATING_MESSAGING,"Professional"))
+                    .object(request).build();
+            } catch (Exception e) {
+                throw new CreateException(String.format(ERROR_CREATING_MESSAGING, "Professional", e.getMessage()));
+            }
         }
+
+        throw new CreateException(String.format(ERROR_CREATING_MESSAGING, "professional", "there is already a registered user with this email"));
     }
 
     @Override
@@ -168,6 +176,31 @@ public class ProfessionalModelImpl implements ProfessionalModel{
             throw e;
         } catch (Exception e) {
             throw new SelectException(String.format(ERROR_SELECTING_MESSAGING, "patients", e.getMessage()));
+        }
+    }
+
+    @Override
+    public SucessModel authentication(String email, String password) {
+        try {
+            var professional = professionalRepository.findByEmailAddress(email);
+
+            if(professional.isPresent()) {
+                var emailProfessional = professional.get().getEmailAddress();
+                var passwordProfessional = professional.get().getPassword();
+
+                if(emailProfessional.concat(passwordProfessional).equals(email.concat(password)))
+                    return SucessModel.builder()
+                        .description("Sucess Authentication")
+                        .build();
+                
+                throw new RuntimeException();
+            }
+            
+            throw new DataNotFoundException("email not found");
+        } catch (DataNotFoundException e) {
+            throw e;
+        }catch (Exception e) {
+            throw new AuthenticateException("email or password not matching");
         }
     }
 }
