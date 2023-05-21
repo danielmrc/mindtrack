@@ -3,7 +3,8 @@
  Post: url> /professional
 
     exemplo de body: 
-        ```
+
+        ```java 
             {
                 "crp": "12398472633",
                 "name": "testando insert prof",
@@ -28,7 +29,7 @@
 
     exemplo de body:
 
-        ```
+        ```java
             {
                 "crp": "12398472633",
                 "name": "testando insert prof",
@@ -60,7 +61,7 @@
 
     exemplo de resposta:
 
-    ```
+    ```java
         {
             "description": "Sucess Professional selecting",
             "object": {
@@ -88,7 +89,7 @@
     
     exemplo de resposta: 
 
-    ```
+    ```java
         {
             "description": "Sucess patients selecting",
             "object": [
@@ -120,7 +121,8 @@
     crp do profissional que está cadastrando o paciente
 
     exemplo de body: 
-        ```
+
+        ```java
             {
                 "cpf": "12987654777",
                 "name": "testando para segundo profissional",
@@ -146,7 +148,7 @@
 
     exemplo de body:
 
-        ```
+        ```java
             {
                 "cpf": "12987654777",
                 "name": "testando alteração",
@@ -178,7 +180,7 @@
     
     exemplo de resposta: 
 
-    ```
+    ```java
         {
             "description": "Sucess patient creating",
             "object": {
