@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
 
-public interface Controller {
+public interface ProfessionalController {
 
     ResponseEntity<?> createProfessional(ProfessionalDTO request);
 

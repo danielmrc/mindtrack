@@ -4,9 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ManyToAny;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,6 +47,15 @@ public class PatientEntity {
     private String responsible;
 
     @ManyToMany(mappedBy = "patients")
-    List<ProfessionalEntity> professionals;
+    private List<ProfessionalEntity> professionals;
     
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
+
+    @OneToMany(mappedBy = "patient")
+    private List<AppointmentEntity> appointments;
+
+    @OneToMany(mappedBy = "patient")
+    private List<ReportEntity> reports;
 }

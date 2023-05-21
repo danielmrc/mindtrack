@@ -6,7 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,4 +53,13 @@ public class ProfessionalEntity {
                 inverseJoinColumns = @JoinColumn(name = "cpf"))
     private List<PatientEntity> patients;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
+
+    @OneToMany(mappedBy = "professional")
+    private List<AppointmentEntity> appointments;
+
+    @OneToMany(mappedBy = "professional")
+    private List<ReportEntity> reports;
 }

@@ -6,6 +6,7 @@ import com.mindtrack.mindtrack.model.ProfessionalModel;
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
 import com.mindtrack.mindtrack.model.dto.SucessModel;
 import com.mindtrack.mindtrack.repository.ProfessionalRepository;
+import com.mindtrack.mindtrack.entity.AddressEntity;
 import com.mindtrack.mindtrack.entity.ProfessionalEntity;
 import com.mindtrack.mindtrack.exception.CreateException;
 import com.mindtrack.mindtrack.exception.UpdateException;
@@ -34,12 +35,20 @@ public class ProfessionalModelImpl implements ProfessionalModel{
 
     @Override
     public SucessModel insertProfessional(ProfessionalDTO request) {
+        var address = AddressEntity.builder()
+            .city(request.getCity())
+            .country(request.getCountry())
+            .postalCode(request.getPostalCode())
+            .state(request.getState())
+            .street(request.getStreet()).build();
+
         var professional = ProfessionalEntity.builder()
             .crp(request.getCrp())
             .dateOfBirth(LocalDate.parse(request.getDateOfBirth(), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
             .emailAddress(request.getEmailAddress())
             .name(request.getName())
-            .phoneNumber(request.getPhoneNumber()).build();
+            .phoneNumber(request.getPhoneNumber())
+            .address(address).build();
 
         try {
             professionalRepository.save(professional);
@@ -62,6 +71,11 @@ public class ProfessionalModelImpl implements ProfessionalModel{
         professionalEntity.setEmailAddress(request.getEmailAddress());
         professionalEntity.setName(request.getName());
         professionalEntity.setPhoneNumber(request.getPhoneNumber());
+        professionalEntity.getAddress().setCity(request.getCity());
+        professionalEntity.getAddress().setCountry(request.getCountry());
+        professionalEntity.getAddress().setPostalCode(request.getPostalCode());
+        professionalEntity.getAddress().setState(request.getState());
+        professionalEntity.getAddress().setStreet(request.getStreet());
 
         try{
             professionalRepository.save(professionalEntity);
@@ -97,7 +111,12 @@ public class ProfessionalModelImpl implements ProfessionalModel{
                     .dateOfBirth(professional.get().getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
                     .emailAddress(professional.get().getEmailAddress())
                     .phoneNumber(professional.get().getPhoneNumber())
-                    .name(professional.get().getName()).build();
+                    .name(professional.get().getName())
+                    .city(professional.get().getAddress().getCity())
+                    .country(professional.get().getAddress().getCountry())
+                    .postalCode(professional.get().getAddress().getPostalCode())
+                    .state(professional.get().getAddress().getState())
+                    .street(professional.get().getAddress().getStreet()).build();
 
                     return SucessModel.builder()
                         .description(String.format(SUCESS_SELECTING_MESSAGING, "Professional"))

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mindtrack.mindtrack.controller.Controller;
+import com.mindtrack.mindtrack.controller.ProfessionalController;
 import com.mindtrack.mindtrack.model.ProfessionalModel;
 import com.mindtrack.mindtrack.model.dto.ErrorModel;
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
@@ -20,11 +20,11 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class ControllerImpl implements Controller{
+public class ProfessionalControllerImpl implements ProfessionalController{
 
     private final ProfessionalModel professionalModel;
 
-    @PostMapping("/create/professional")
+    @PostMapping("/professional")
     @Override
     public ResponseEntity<?> createProfessional(@RequestBody ProfessionalDTO request) {
         try {
@@ -40,7 +40,7 @@ public class ControllerImpl implements Controller{
         }
     }
 
-    @PutMapping("/update/professional/{id}")
+    @PutMapping("/professional/{id}")
     @Override
     public ResponseEntity<?> updateProfessional(@PathVariable String id, @RequestBody ProfessionalDTO request) {
         try {
@@ -59,7 +59,7 @@ public class ControllerImpl implements Controller{
         }
     }
 
-    @DeleteMapping("/delete/professional/{id}")
+    @DeleteMapping("/professional/{id}")
     @Override
     public ResponseEntity<?> deleteProfessional(@PathVariable String id) {
         try {
@@ -75,7 +75,7 @@ public class ControllerImpl implements Controller{
         }
     }
     
-    @GetMapping("/select/professional/{id}") 
+    @GetMapping("/professional/{id}") 
     @Override
     public ResponseEntity<?> selectProfessional(@PathVariable String id){
         try {

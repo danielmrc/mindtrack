@@ -5,14 +5,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 @SuperBuilder
-public class ProfessionalDTO extends PersonDTO{
+public class PatientDTO extends PersonDTO{
     
-    public ProfessionalDTO() {}
-
-    private String crp;
+    private String cpf;
+    private String responsible;
 
 }
