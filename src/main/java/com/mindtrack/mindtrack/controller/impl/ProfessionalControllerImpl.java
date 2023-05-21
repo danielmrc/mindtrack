@@ -1,7 +1,5 @@
 package com.mindtrack.mindtrack.controller.impl;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mindtrack.mindtrack.controller.ProfessionalController;
+import com.mindtrack.mindtrack.exception.DataNotFoundException;
 import com.mindtrack.mindtrack.model.ProfessionalModel;
 import com.mindtrack.mindtrack.model.dto.ErrorModel;
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
@@ -82,11 +81,31 @@ public class ProfessionalControllerImpl implements ProfessionalController{
             var sucessObject = professionalModel.selectProfessional(id);
 
             return ResponseEntity.status(200).body(sucessObject);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
             var error = ErrorModel.builder()
                 .error("DB ERROR")
                 .description(String.format(e.getMessage())).build();
             
+            return ResponseEntity.status(422).body(error);
+        }
+    }
+
+    @GetMapping("/professional/patients/{id}")
+    @Override
+    public ResponseEntity<?> selectPatients(@PathVariable String id) {
+        try {
+            var sucessObject = professionalModel.selectPatients(id);
+
+            return ResponseEntity.status(200).body(sucessObject);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            var error = ErrorModel.builder()
+                .error("DB ERROR")
+                .description(e.getMessage()).build();
+
             return ResponseEntity.status(422).body(error);
         }
     }

@@ -11,6 +11,8 @@ import lombok.Setter;
 @Getter
 public class SucessModel {
 
+    public SucessModel() {}
+
     private String description;
     private Object object;
     

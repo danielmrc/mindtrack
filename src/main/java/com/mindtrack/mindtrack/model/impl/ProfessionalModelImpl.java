@@ -4,16 +4,20 @@ import org.springframework.stereotype.Service;
 
 import com.mindtrack.mindtrack.model.ProfessionalModel;
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
+import com.mindtrack.mindtrack.model.dto.PatientDTO;
 import com.mindtrack.mindtrack.model.dto.SucessModel;
 import com.mindtrack.mindtrack.repository.ProfessionalRepository;
 import com.mindtrack.mindtrack.entity.AddressEntity;
 import com.mindtrack.mindtrack.entity.ProfessionalEntity;
 import com.mindtrack.mindtrack.exception.CreateException;
+import com.mindtrack.mindtrack.exception.DataNotFoundException;
 import com.mindtrack.mindtrack.exception.UpdateException;
 import com.mindtrack.mindtrack.exception.DeleteException;
 import com.mindtrack.mindtrack.exception.SelectException;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDate;
 
 import lombok.RequiredArgsConstructor;
@@ -123,10 +127,47 @@ public class ProfessionalModelImpl implements ProfessionalModel{
                         .object(professionalDTO).build();
             }
 
-            return null;
+            throw new DataNotFoundException("Professional not found!");
+        } catch (DataNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new SelectException(String.format(ERROR_SELECTING_MESSAGING, "Professiona", e.getMessage()));
         }
     }
     
+    @Override
+    public SucessModel selectPatients(String id) {
+        try {
+            var professional = professionalRepository.findById(id);
+
+            if(professional.isPresent() && !professional.get().getPatients().isEmpty()){
+                List<PatientDTO> patients = new ArrayList<>();
+
+                professional.get().getPatients().forEach(item -> {
+                    patients.add(PatientDTO.builder()
+                        .city(item.getAddress().getCity())
+                        .country(item.getAddress().getCountry())
+                        .cpf(item.getCpf())
+                        .dateOfBirth(item.getDateOfBirth().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                        .emailAddress(item.getEmailAddress())
+                        .name(item.getName())
+                        .phoneNumber(item.getPhoneNumber())
+                        .postalCode(item.getAddress().getPostalCode())
+                        .responsible(item.getResponsible())
+                        .state(item.getAddress().getState())
+                        .street(item.getAddress().getStreet()).build());
+                });
+
+                return SucessModel.builder()
+                    .description(String.format(SUCESS_SELECTING_MESSAGING, "patients"))
+                    .object(patients).build(); 
+            }
+
+            throw new DataNotFoundException("professional not found");
+        } catch (DataNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new SelectException(String.format(ERROR_SELECTING_MESSAGING, "patients", e.getMessage()));
+        }
+    }
 }

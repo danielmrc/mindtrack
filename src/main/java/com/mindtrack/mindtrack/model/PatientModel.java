@@ -11,6 +11,6 @@ public interface PatientModel {
 
     SucessModel deletePatient(String professionalId, String id);
     
-    SucessModel selectPatient(String professionalId, String id);
+    SucessModel selectPatient(String id);
     
 }

@@ -28,6 +28,8 @@ import static com.mindtrack.mindtrack.constant.AppConstant.SCHEMA;
 @Builder
 public class PatientEntity {
 
+    public PatientEntity() {}
+
     @Id
     private String cpf;
 

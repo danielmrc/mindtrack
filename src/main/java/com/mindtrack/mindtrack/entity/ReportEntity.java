@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +19,13 @@ import static com.mindtrack.mindtrack.constant.AppConstant.SCHEMA;
 
 @Entity(name = "ReportEntity")
 @Table(schema = SCHEMA, name = "report")
+@AllArgsConstructor
 @Getter
 @Setter
 @Builder
 public class ReportEntity {
+
+    public ReportEntity() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

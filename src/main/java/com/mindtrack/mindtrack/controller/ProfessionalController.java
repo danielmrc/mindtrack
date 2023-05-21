@@ -13,4 +13,7 @@ public interface ProfessionalController {
     ResponseEntity<?> deleteProfessional(String id);
     
     ResponseEntity<?> selectProfessional(String id);
+
+    ResponseEntity<?> selectPatients(String id);
+    
 }

@@ -12,5 +12,7 @@ public interface ProfessionalModel {
     SucessModel deleteProfessional(String id);
 
     SucessModel selectProfessional(String id);
+
+    SucessModel selectPatients(String id);
     
 }
