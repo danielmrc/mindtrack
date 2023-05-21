@@ -14,5 +14,6 @@ public class ProfessionalDTO extends PersonDTO{
     public ProfessionalDTO() {}
 
     private String crp;
+    private String password;
 
 }

@@ -14,6 +14,7 @@ import com.mindtrack.mindtrack.exception.DataNotFoundException;
 import com.mindtrack.mindtrack.model.ProfessionalModel;
 import com.mindtrack.mindtrack.model.dto.ErrorModel;
 import com.mindtrack.mindtrack.model.dto.ProfessionalDTO;
+import com.mindtrack.mindtrack.model.dto.AuthenticationDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -104,6 +105,24 @@ public class ProfessionalControllerImpl implements ProfessionalController{
         } catch (Exception e) {
             var error = ErrorModel.builder()
                 .error("DB ERROR")
+                .description(e.getMessage()).build();
+
+            return ResponseEntity.status(422).body(error);
+        }
+    }
+
+    @PostMapping("/professional/authentication")
+    @Override
+    public ResponseEntity<?> authentication(@RequestBody AuthenticationDTO request) {
+        try {
+            var sucessObject = professionalModel.authentication(request.getEmail(), request.getPassword());
+
+            return ResponseEntity.status(200).body(sucessObject);
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            var error = ErrorModel.builder()
+                .error("Authentication Error")
                 .description(e.getMessage()).build();
 
             return ResponseEntity.status(422).body(error);

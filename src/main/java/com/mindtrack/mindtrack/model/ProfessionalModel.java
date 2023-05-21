@@ -14,5 +14,7 @@ public interface ProfessionalModel {
     SucessModel selectProfessional(String id);
 
     SucessModel selectPatients(String id);
+
+    SucessModel authentication(String email, String password);
     
 }

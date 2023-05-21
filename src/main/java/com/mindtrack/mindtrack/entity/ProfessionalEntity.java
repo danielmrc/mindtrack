@@ -47,6 +47,9 @@ public class ProfessionalEntity {
     @Column(name = "email_address")
     private String emailAddress;
 
+    @Column(name = "password")
+    private String password;
+
     @ManyToMany()
     @JoinTable( name = "professional_patient",
                 joinColumns = @JoinColumn(name = "crp"),
