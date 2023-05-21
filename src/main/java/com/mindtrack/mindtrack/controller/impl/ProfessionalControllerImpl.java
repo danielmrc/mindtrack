@@ -39,11 +39,11 @@ public class ProfessionalControllerImpl implements ProfessionalController{
         }
     }
 
-    @PutMapping("/professional/{id}")
+    @PutMapping("/professional/{crp}")
     @Override
-    public ResponseEntity<?> updateProfessional(@PathVariable String id, @RequestBody ProfessionalDTO request) {
+    public ResponseEntity<?> updateProfessional(@PathVariable String crp, @RequestBody ProfessionalDTO request) {
         try {
-            var sucessObject = professionalModel.updateProfessional(id, request);
+            var sucessObject = professionalModel.updateProfessional(crp, request);
 
             if(sucessObject.equals(null))
                 return ResponseEntity.noContent().build();
@@ -58,11 +58,11 @@ public class ProfessionalControllerImpl implements ProfessionalController{
         }
     }
 
-    @DeleteMapping("/professional/{id}")
+    @DeleteMapping("/professional/{crp}")
     @Override
-    public ResponseEntity<?> deleteProfessional(@PathVariable String id) {
+    public ResponseEntity<?> deleteProfessional(@PathVariable String crp) {
         try {
-            var sucessObject = professionalModel.deleteProfessional(id);
+            var sucessObject = professionalModel.deleteProfessional(crp);
 
             return ResponseEntity.status(200).body(sucessObject);
         } catch (Exception e) {
@@ -74,11 +74,11 @@ public class ProfessionalControllerImpl implements ProfessionalController{
         }
     }
     
-    @GetMapping("/professional/{id}") 
+    @GetMapping("/professional/{crp}") 
     @Override
-    public ResponseEntity<?> selectProfessional(@PathVariable String id){
+    public ResponseEntity<?> selectProfessional(@PathVariable String crp){
         try {
-            var sucessObject = professionalModel.selectProfessional(id);
+            var sucessObject = professionalModel.selectProfessional(crp);
 
             return ResponseEntity.status(200).body(sucessObject);
         } catch (DataNotFoundException e) {
@@ -92,11 +92,11 @@ public class ProfessionalControllerImpl implements ProfessionalController{
         }
     }
 
-    @GetMapping("/professional/patients/{id}")
+    @GetMapping("/professional/patients/{crp}")
     @Override
-    public ResponseEntity<?> selectPatients(@PathVariable String id) {
+    public ResponseEntity<?> selectPatients(@PathVariable String crp) {
         try {
-            var sucessObject = professionalModel.selectPatients(id);
+            var sucessObject = professionalModel.selectPatients(crp);
 
             return ResponseEntity.status(200).body(sucessObject);
         } catch (DataNotFoundException e) {
