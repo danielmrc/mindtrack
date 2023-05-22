@@ -15,7 +15,8 @@
                 "state": "Sao Paulo",
                 "country": "teste update address",
                 "street": "rua 12",
-                "postalCode": "30219011"
+                "postalCode": "30219011",
+                "password": "123"
             }
         ```
 
