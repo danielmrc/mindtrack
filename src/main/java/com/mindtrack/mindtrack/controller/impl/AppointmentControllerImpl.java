@@ -23,7 +23,8 @@ public class AppointmentControllerImpl implements AppointmentController{
 
     @Override
     @PostMapping("/appointment/{crp}/{cpf}")
-    public ResponseEntity<?> createAppointment(@PathVariable String crp, @PathVariable String cpf, @RequestBody AppointmentDTO request) {
+    public ResponseEntity<?> createAppointment(@PathVariable String crp, @PathVariable String cpf,
+     @RequestBody AppointmentDTO request) {
         try {
             var sucessObject = appointmentModel.createAppointment(crp, cpf, request);
 
