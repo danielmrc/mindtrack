@@ -1,6 +1,7 @@
 package com.mindtrack.mindtrack.controller.impl;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.mindtrack.mindtrack.model.dto.ErrorModel;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequiredArgsConstructor
 public class AppointmentControllerImpl implements AppointmentController{
