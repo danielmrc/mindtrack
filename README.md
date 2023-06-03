@@ -1,10 +1,10 @@
-#Criar profissional
+**Criar profissional**
 
  Post: url> /professional
 
     exemplo de body: 
 
-        ```java 
+        `````java 
             {
                 "crp": "12398472633",
                 "name": "testando insert prof",
@@ -18,11 +18,11 @@
                 "postalCode": "30219011",
                 "password": "123"
             }
-        ```
+        `````
 
     retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
-#Alterar profissional
+**Alterar profissional**
 
  Put: url> /professional/{crp}
 
@@ -30,7 +30,7 @@
 
     exemplo de body:
 
-        ```java
+        `````java
             {
                 "crp": "12398472633",
                 "name": "testando insert prof",
@@ -43,26 +43,26 @@
                 "street": "rua 12",
                 "postalCode": "30219011"
             }
-        ```
+        `````
 
      retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
-#Deletar professional
+**Deletar professional**
 
  Delete: url> /professional/{crp}
 
  retorna 200 em caso de sucesso e 422 em caso de exceção
 
 
-#Selectional professional
+**Selecionar professional**
 
- Get> url /professiona/{crp}
+ Get> url /professional/{crp}
 
     var retornar os dados do professional portador do crp passado
 
     exemplo de resposta:
 
-    ```java
+    `````java
         {
             "description": "Sucess Professional selecting",
             "object": {
@@ -78,11 +78,11 @@
                 "crp": "12398472633"
             }
         }
-    ```
+    `````
 
      retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o crp passado
 
-#Selecionar pacientes de um professional
+**Selecionar pacientes de um professional**
 
  Get: url> /professional/patients/{crp}
 
@@ -90,7 +90,7 @@
     
     exemplo de resposta: 
 
-    ```java
+    `````java
         {
             "description": "Sucess patients selecting",
             "object": [
@@ -109,13 +109,13 @@
                 }
             ]
         }
-    ```
+    `````
 
     retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o crp passado
 
 
 
-#Criar paciente
+**Criar paciente**
 
  Post: url> /patient/{crp}
 
@@ -123,7 +123,7 @@
 
     exemplo de body: 
 
-        ```java
+        `````java
             {
                 "cpf": "12987654777",
                 "name": "testando para segundo profissional",
@@ -137,11 +137,11 @@
                 "postalCode": "20520825",
                 "responsible": "Tia 5"
             }
-        ```
+        `````
 
         retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
-#Alterar paciente
+**Alterar paciente**
 
  Put: url> /patient/{cpf}
 
@@ -149,7 +149,7 @@
 
     exemplo de body:
 
-        ```java
+        `````java
             {
                 "cpf": "12987654777",
                 "name": "testando alteração",
@@ -163,11 +163,11 @@
                 "postalCode": "20520825",
                 "responsible": "Tia 6"
             }
-        ```
+        `````
 
         retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
-#Deletar paciente
+**Deletar paciente**
 
  Delete: url> /patient/{crp}/{cpf}
 
@@ -175,13 +175,13 @@
 
     retorna 200 em caso de sucesso e 422 em caso de exceção
 
-#Selecionar paciente
+**Selecionar paciente**
 
  Get: url> /patient/{cpf}
     
     exemplo de resposta: 
 
-    ```java
+    `````java
         {
             "description": "Sucess patient selecting",
             "object": {
@@ -198,18 +198,18 @@
                 "responsible": "Tia 5"
             }
         }   
-    ```
+    `````
 
     retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o cpf passado
 
 
-#Criar consulta
+**Criar consulta**
 
  Post: url> /appointment/{crp}/{cpf}
     
     exemplo de resposta
 
-        ```java
+        `````java
         {
             "description": "Sucess appointment creating",
             "object": {
@@ -221,14 +221,14 @@
                 "paid": false
             }
         }   
-    ```
+    `````
 
     OBS: passar o "date" no formato dd/MM/yyyy hh:mm
 
     retorna 200 em caso de sucesso e 422 em caso de exceção
 
 
-#Listar consultas
+**Listar consultas**
 
  Get: url> /appointment/{crp}
 
@@ -236,7 +236,7 @@
     
     exemplo de resposta
 
-        ```java
+        `````java
         {
             "description": "Sucess appointments selecting",
             "object": [
@@ -246,7 +246,20 @@
                     "local": "Consultório",
                     "inPerson": true,
                     "price": 99.99,
-                    "paid": false
+                    "paid": false,
+                    "patient": {
+                        "name": "testando para segundo profissional",
+                        "phoneNumber": "3198477995",
+                        "dateOfBirth": "15/09/1995",
+                        "emailAddress": "testandoCadastroPacientes5@gmail.com",
+                        "street": "rua 5",
+                        "city": "Betim",
+                        "state": "Minas Gerais",
+                        "postalCode": "20520825",
+                        "country": "teste4",
+                        "cpf": "12987654777",
+                        "responsible": "Tia 5"
+                    }
                 },
                 {
                     "date": "15/02/2023 15:30",
@@ -254,26 +267,39 @@
                     "local": "Consultório",
                     "inPerson": true,
                     "price": 120.0,
-                    "paid": false
+                    "paid": false,
+                    "patient": {
+                        "name": "testando para segundo profissional",
+                        "phoneNumber": "3198477995",
+                        "dateOfBirth": "15/09/1995",
+                        "emailAddress": "testandoCadastroPacientes5@gmail.com",
+                        "street": "rua 5",
+                        "city": "Betim",
+                        "state": "Minas Gerais",
+                        "postalCode": "20520825",
+                        "country": "teste4",
+                        "cpf": "12987654777",
+                        "responsible": "Tia 5"
+                    }
                 }
             ]
         }
-    ```
+    `````
 
     retorna 200 em caso de sucesso, 204 caso não encontre registro e 422 em caso de exceção
 
 
-#Auth (Login)
+**Auth (Login)**
 
   Post: url> /professional/authentication
 
   exemplo de body a ser enviado:
 
-    ```java
+    `````java
         {
             "email": "testandoauthenticacao@gmail.com",
             "password": "123"
         }
-    ```
+    `````
 
     retorna 200 em caso de login bem sucedido, 204 caso não encontre o professional com aquele email e 422 em casos de senha ou email errado

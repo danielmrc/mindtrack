@@ -19,5 +19,6 @@ public class AppointmentDTO {
     private Boolean inPerson;
     private Double price;
     private Boolean paid;
+    private PatientDTO patient;
 
 }

@@ -9,6 +9,7 @@ import com.mindtrack.mindtrack.exception.SelectException;
 import com.mindtrack.mindtrack.model.AppointmentModel;
 import com.mindtrack.mindtrack.model.dto.SucessModel;
 import com.mindtrack.mindtrack.model.dto.AppointmentDTO;
+import com.mindtrack.mindtrack.model.dto.PatientDTO;
 import com.mindtrack.mindtrack.repository.AppointmentRepository;
 import com.mindtrack.mindtrack.repository.PatientRepository;
 import com.mindtrack.mindtrack.repository.ProfessionalRepository;
@@ -82,13 +83,28 @@ public class AppointmentModelImpl implements AppointmentModel{
                 List<AppointmentDTO> appointments = new ArrayList<>();
 
                 professional.get().getAppointments().forEach( a -> {
+                    var patient = PatientDTO.builder()
+                        .city(a.getPatient().getAddress().getCity())
+                        .country(a.getPatient().getAddress().getCountry())
+                        .cpf(a.getPatient().getCpf())
+                        .dateOfBirth(a.getPatient().getDateOfBirth()
+                            .format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                        .emailAddress(a.getPatient().getEmailAddress())
+                        .name(a.getPatient().getName())
+                        .phoneNumber(a.getPatient().getPhoneNumber())
+                        .postalCode(a.getPatient().getAddress().getPostalCode())
+                        .responsible(a.getPatient().getResponsible())
+                        .state(a.getPatient().getAddress().getState())
+                        .street(a.getPatient().getAddress().getStreet()).build();
+
                     appointments.add(AppointmentDTO.builder()
                         .date(a.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
                         .inPerson(a.getInPerson())
                         .local(a.getLocal())
                         .paid(a.getPaid())
                         .price(a.getPrice())
-                        .recurrence(a.getRecurrence()).build());
+                        .recurrence(a.getRecurrence())
+                        .patient(patient).build());
                 });
 
                 return SucessModel.builder()
