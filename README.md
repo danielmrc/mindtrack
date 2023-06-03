@@ -4,7 +4,7 @@
 
     exemplo de body: 
 
-        `````java 
+
             {
                 "crp": "12398472633",
                 "name": "testando insert prof",
@@ -18,7 +18,7 @@
                 "postalCode": "30219011",
                 "password": "123"
             }
-        `````
+
 
     retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
@@ -30,7 +30,7 @@
 
     exemplo de body:
 
-        `````java
+
             {
                 "crp": "12398472633",
                 "name": "testando insert prof",
@@ -43,7 +43,7 @@
                 "street": "rua 12",
                 "postalCode": "30219011"
             }
-        `````
+
 
      retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
@@ -62,7 +62,6 @@
 
     exemplo de resposta:
 
-    `````java
         {
             "description": "Sucess Professional selecting",
             "object": {
@@ -78,7 +77,7 @@
                 "crp": "12398472633"
             }
         }
-    `````
+
 
      retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o crp passado
 
@@ -90,7 +89,7 @@
     
     exemplo de resposta: 
 
-    `````java
+
         {
             "description": "Sucess patients selecting",
             "object": [
@@ -109,7 +108,7 @@
                 }
             ]
         }
-    `````
+
 
     retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o crp passado
 
@@ -123,7 +122,7 @@
 
     exemplo de body: 
 
-        `````java
+
             {
                 "cpf": "12987654777",
                 "name": "testando para segundo profissional",
@@ -137,7 +136,7 @@
                 "postalCode": "20520825",
                 "responsible": "Tia 5"
             }
-        `````
+
 
         retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
@@ -149,7 +148,7 @@
 
     exemplo de body:
 
-        `````java
+
             {
                 "cpf": "12987654777",
                 "name": "testando alteração",
@@ -163,7 +162,7 @@
                 "postalCode": "20520825",
                 "responsible": "Tia 6"
             }
-        `````
+
 
         retorna 200 com novo objeto alterado em caso de sucesso e 422 em caso de exceção
 
@@ -181,7 +180,7 @@
     
     exemplo de resposta: 
 
-    `````java
+
         {
             "description": "Sucess patient selecting",
             "object": {
@@ -198,7 +197,7 @@
                 "responsible": "Tia 5"
             }
         }   
-    `````
+
 
     retorna 200 em caso de sucesso, 422 em caso de exceção e 204 caso não encontre dados para o cpf passado
 
@@ -209,7 +208,7 @@
     
     exemplo de resposta
 
-        `````java
+
         {
             "description": "Sucess appointment creating",
             "object": {
@@ -221,7 +220,7 @@
                 "paid": false
             }
         }   
-    `````
+
 
     OBS: passar o "date" no formato dd/MM/yyyy hh:mm
 
@@ -236,7 +235,7 @@
     
     exemplo de resposta
 
-        `````java
+
         {
             "description": "Sucess appointments selecting",
             "object": [
@@ -284,7 +283,7 @@
                 }
             ]
         }
-    `````
+
 
     retorna 200 em caso de sucesso, 204 caso não encontre registro e 422 em caso de exceção
 
@@ -295,11 +294,11 @@
 
   exemplo de body a ser enviado:
 
-    `````java
+
         {
             "email": "testandoauthenticacao@gmail.com",
             "password": "123"
         }
-    `````
+
 
     retorna 200 em caso de login bem sucedido, 204 caso não encontre o professional com aquele email e 422 em casos de senha ou email errado
