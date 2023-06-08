@@ -56,9 +56,9 @@
 
 **Selecionar professional**
 
- Get> url /professional/{crp}
+ Get> url /professional/{email}
 
-    var retornar os dados do professional portador do crp passado
+    var retornar os dados do professional portador do email passado
 
     exemplo de resposta:
 
