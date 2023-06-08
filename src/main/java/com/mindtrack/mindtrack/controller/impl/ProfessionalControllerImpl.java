@@ -77,11 +77,11 @@ public class ProfessionalControllerImpl implements ProfessionalController{
         }
     }
     
-    @GetMapping("/professional/{crp}") 
+    @GetMapping("/professional/{email}") 
     @Override
-    public ResponseEntity<?> selectProfessional(@PathVariable String crp){
+    public ResponseEntity<?> selectProfessional(@PathVariable String email){
         try {
-            var sucessObject = professionalModel.selectProfessional(crp);
+            var sucessObject = professionalModel.selectProfessional(email);
 
             return ResponseEntity.status(200).body(sucessObject);
         } catch (DataNotFoundException e) {
