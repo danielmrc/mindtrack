@@ -115,7 +115,7 @@ public class ProfessionalModelImpl implements ProfessionalModel{
     @Override
     public SucessModel selectProfessional(String id) {
         try{
-            var professional = professionalRepository.findById(id);
+            var professional = professionalRepository.findByEmailAddress(id);
 
             if(professional.isPresent()) {
                 var professionalDTO = ProfessionalDTO.builder()
