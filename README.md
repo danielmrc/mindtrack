@@ -206,7 +206,7 @@
 
  Post: url> /appointment/{crp}/{cpf}
     
-    exemplo de resposta
+    exemplo de body para a criação
 
             {
                 "date": "15/10/2023 11:29",
