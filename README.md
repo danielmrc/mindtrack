@@ -208,19 +208,14 @@
     
     exemplo de resposta
 
-
-        {
-            "description": "Sucess appointment creating",
-            "object": {
+            {
                 "date": "15/10/2023 11:29",
                 "recurrence": "Trimestral",
                 "local": "Consultório",
                 "inPerson": true,
                 "price": 99.99,
                 "paid": false
-            }
-        }   
-
+            }  
 
     OBS: passar o "date" no formato dd/MM/yyyy hh:mm
 
