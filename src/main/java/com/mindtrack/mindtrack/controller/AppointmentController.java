@@ -9,4 +9,8 @@ public interface AppointmentController {
     ResponseEntity<?> createAppointment(String crp, String cpf, AppointmentDTO request);
 
     ResponseEntity<?> selectAppointment(String crp);
+
+    ResponseEntity<?> updateAppointment(Integer id, AppointmentDTO request);
+
+    ResponseEntity<?> deleteAppointment(Integer id);
 }

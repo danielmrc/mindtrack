@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import com.mindtrack.mindtrack.entity.AppointmentEntity;
 import com.mindtrack.mindtrack.exception.CreateException;
 import com.mindtrack.mindtrack.exception.DataNotFoundException;
+import com.mindtrack.mindtrack.exception.DeleteException;
 import com.mindtrack.mindtrack.exception.SelectException;
+import com.mindtrack.mindtrack.exception.UpdateException;
 import com.mindtrack.mindtrack.model.AppointmentModel;
 import com.mindtrack.mindtrack.model.dto.SucessModel;
 import com.mindtrack.mindtrack.model.dto.AppointmentDTO;
@@ -98,6 +100,7 @@ public class AppointmentModelImpl implements AppointmentModel{
                         .street(a.getPatient().getAddress().getStreet()).build();
 
                     appointments.add(AppointmentDTO.builder()
+                        .id(a.getId())
                         .date(a.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
                         .inPerson(a.getInPerson())
                         .local(a.getLocal())
@@ -117,6 +120,46 @@ public class AppointmentModelImpl implements AppointmentModel{
             throw e;
         } catch (Exception e) {
             throw new SelectException(String.format(ERROR_SELECTING_MESSAGING, "appointment", e.getMessage()));
+        }
+    }
+
+    @Override
+    public SucessModel updateAppointment(Integer id, AppointmentDTO request) {
+        try {
+            var appointment = appointmentRepository.findById(id);
+
+            if(appointment.isPresent()) {
+                appointment.get().setDate(LocalDateTime.parse(request.getDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+                appointment.get().setInPerson(request.getInPerson());
+                appointment.get().setLocal(request.getLocal());
+                appointment.get().setPaid(request.getPaid());
+                appointment.get().setPrice(request.getPrice());
+                appointment.get().setRecurrence(request.getRecurrence());
+
+                appointmentRepository.save(appointment.get());
+
+                return SucessModel.builder()
+                    .description(String.format(SUCESS_SELECTING_MESSAGING, "appointments"))
+                    .object(request).build();
+            }
+
+            throw new DataNotFoundException("not found appointment with this id");
+        } catch (DataNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new UpdateException(String.format(ERROR_UPDATING_MESSAGING, "appointment", e.getMessage()));
+        }
+    }
+
+    @Override
+    public SucessModel deleteAppointment(Integer id) {
+        try {
+            appointmentRepository.deleteById(id);
+
+            return SucessModel.builder()
+                .description(String.format(SUCESS_DELETING_MESSAGING, "Appointment")).build();
+        } catch (Exception e) {
+            throw new DeleteException(String.format(ERROR_DELETING_MESSAGING, "Appointment", e.getMessage()));
         }
     }
     
