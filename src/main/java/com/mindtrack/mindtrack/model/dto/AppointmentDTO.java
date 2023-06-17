@@ -13,6 +13,7 @@ public class AppointmentDTO {
     
     public AppointmentDTO() {}
 
+    private Integer id;
     private String date;
     private String recurrence;
     private String local;

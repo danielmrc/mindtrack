@@ -222,6 +222,33 @@
     retorna 200 em caso de sucesso e 422 em caso de exceção
 
 
+**Alterar consulta**
+
+ Put: url> /appointment/{id}
+    
+    exemplo de body para a alteracao
+
+            {
+                "id": 1,
+                "date": "15/10/2023 11:29",
+                "recurrence": "Trimestral",
+                "local": "Consultório",
+                "inPerson": true,
+                "price": 99.99,
+                "paid": false
+            }  
+
+    OBS: passar o "date" no formato dd/MM/yyyy hh:mm
+
+    retorna 200 em caso de sucesso e 422 em caso de exceção
+
+ 
+**Deletar consulta**
+ Delete: url> /appointment/{id}
+
+    retorna 200 em caso de sucesso e 422 em caso de exceção                    
+
+
 **Listar consultas**
 
  Get: url> /appointment/{crp}
@@ -235,6 +262,7 @@
             "description": "Sucess appointments selecting",
             "object": [
                 {
+                    "id": 2,
                     "date": "15/10/2023 11:29",
                     "recurrence": "Trimestral",
                     "local": "Consultório",
@@ -256,6 +284,7 @@
                     }
                 },
                 {
+                    "id": 3,
                     "date": "15/02/2023 15:30",
                     "recurrence": "Trimestral",
                     "local": "Consultório",
